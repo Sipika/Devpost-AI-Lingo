@@ -25,8 +25,9 @@ const NewsPage: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="block glass p-4 rounded-lg hover:scale-105 transform transition"
+          >
             <div className="flex items-center">
-              <span role="img" aria-label="icon" className="mr-2 text-2xl text-violet-300">{item.icon}</span>
+              <span role="img" aria-label="icon" className="mr-2 text-4xl text-white">{item.icon}</span>
               <h3 className="text-xl font-medium text-violet-300">{item.title}</h3>
             </div>
             <p className="mt-2 text-slate-300">Read the latest AI news article.</p>
