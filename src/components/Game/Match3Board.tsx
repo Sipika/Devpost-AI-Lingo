@@ -194,36 +194,83 @@ const Match3Board: React.FC = () => {
 
   };
 
+  const level = Math.floor(score / 600) + 1;
+  const targetScore = level * 600;
+  const currentLevelBase = (level - 1) * 600;
+  const progress = Math.min(((score - currentLevelBase) / 600) * 100, 100);
+
   return (
-    <div className="flex flex-col items-center space-y-4">
-                {/* Toast removed to avoid duplicate AI info */}
-      <div className="text-xl font-medium mb-2 text-slate-100">Score: {score}</div>
-      <div className="grid grid-cols-5 gap-2">
-        {board.map((conceptId, i) => {
-          const concept = concepts[conceptId as number];
-          return (
-            <div key={i} className="relative">
-              <Tile
-                concept={concept?.name ?? ''}
-                icon={concept?.icon ?? ''}
-                selected={selected === i}
-                onClick={() => handleTileClick(i)}
-              />
-            </div>
-          );
-        })}
+    <div className="flex flex-col items-center space-y-6 max-w-md mx-auto mt-4">
+      {/* Game Stats & Progress */}
+      <div className="w-full space-y-2">
+        <div className="flex items-center justify-between text-sm font-bold text-slate-200 px-1">
+          <span className="bg-violet-500/10 border border-violet-500/20 text-violet-300 px-3 py-1 rounded-full text-xs">
+            Level {level}
+          </span>
+          <span className="text-slate-200">
+            Score: <span className="text-indigo-400 text-base font-black">{score}</span> / {targetScore}
+          </span>
+        </div>
+        <div className="w-full h-2.5 bg-slate-950/60 border border-white/5 rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-violet-500 via-indigo-500 to-emerald-400 transition-all duration-350"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
       </div>
-      <button
-        className="button mt-4"
-        onClick={restart}
-      >
-        Restart
-      </button>
+
+      {/* Cushioned Board Container */}
+      <div className="p-4 bg-slate-950/60 border border-white/5 rounded-2xl shadow-2xl shadow-black/60 backdrop-blur-sm">
+        <div className="grid grid-cols-5 gap-2.5">
+          {board.map((conceptId, i) => {
+            const concept = concepts[conceptId as number];
+            return (
+              <div key={i} className="relative">
+                <Tile
+                  concept={concept?.name ?? ''}
+                  icon={concept?.icon ?? ''}
+                  selected={selected === i}
+                  onClick={() => handleTileClick(i)}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Buttons & Controls */}
+      <div className="w-full flex justify-center gap-4">
+        <button
+          className="button px-6 py-2.5 text-sm"
+          onClick={restart}
+        >
+          Restart Game
+        </button>
+      </div>
+
+      {/* Educational Legend Card */}
+      <div className="w-full p-4 rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-md text-left space-y-3">
+        <h4 className="text-xs font-bold text-slate-300 uppercase tracking-widest border-b border-white/5 pb-1.5">
+          AI Node Reference Legend
+        </h4>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs text-slate-400">
+          {concepts.map((c) => (
+            <div key={c.id} className="flex items-center gap-2">
+              <span className="text-2xl p-1 bg-white/5 rounded-lg border border-white/5 flex-shrink-0">{c.icon}</span>
+              <div>
+                <p className="font-bold text-slate-200">{c.name}</p>
+                <p className="text-[10px] text-slate-400 leading-tight line-clamp-1">{c.tip}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Central AI tip */}
       {centralTip && (
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-950/85 border border-white/15 backdrop-blur-lg text-slate-100 px-6 py-3.5 rounded-2xl shadow-2xl z-50 text-sm max-w-md text-center flex items-center gap-3">
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-950/90 border border-white/15 backdrop-blur-xl text-slate-100 px-6 py-3.5 rounded-2xl shadow-2xl z-50 text-sm max-w-md text-center flex items-center gap-3">
           <span className="text-xl">💡</span>
-          <span className="leading-relaxed font-medium">{centralTip}</span>
+          <span className="leading-relaxed font-semibold">{centralTip}</span>
         </div>
       )}
     </div>
