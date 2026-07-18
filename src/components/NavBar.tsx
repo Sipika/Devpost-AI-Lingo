@@ -1,6 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Button } from './Button';
+import { useLocation, Link } from 'react-router-dom';
 
 type TabKey = 'game' | 'podcasts' | 'reading' | 'daily' | 'news';
 
@@ -16,15 +15,20 @@ export const NavBar: React.FC = () => {
 
   return (
     <nav className="nav-bar glass">
-      {tabs.map((tab) => (
-        <Button
-          key={tab.key}
-          href={tab.path}
-          className={`nav-tab ${location.pathname === tab.path ? 'nav-tab-active' : ''}`}
-        >
-          {tab.label}
-        </Button>
-      ))}
+      {tabs.map((tab) => {
+        const isActive =
+          location.pathname === tab.path ||
+          (tab.key === 'game' && (location.pathname === '/' || location.pathname === ''));
+        return (
+          <Link
+            key={tab.key}
+            to={tab.path}
+            className={`nav-tab ${isActive ? 'nav-tab-active' : ''}`}
+          >
+            {tab.label}
+          </Link>
+        );
+      })}
     </nav>
   );
 };

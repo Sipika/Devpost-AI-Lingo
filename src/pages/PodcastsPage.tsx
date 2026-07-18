@@ -24,6 +24,8 @@ const podcasts = [
   },
 ];
 
+import { Card } from '../components/Card';
+
 const PodcastsPage: React.FC = () => {
   const handleButtonClick = (podcast: typeof podcasts[0]) => {
     console.log('Play button clicked for', podcast.title);
@@ -32,32 +34,32 @@ const PodcastsPage: React.FC = () => {
   };
 
   return (
-    <>
+    <Card className="p-6 space-y-6">
       <div className="p-4 space-y-6">
         <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-200 mb-4">
           AI Podcasts
         </h2>
         <ul className="space-y-4">
           {podcasts.map((p, idx) => (
-            <li key={idx} className="p-4 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors shadow-lg">
-              <div className="text-xl font-medium text-violet-300 flex items-center">
-                <span className="mr-2" role="img" aria-label="mic">{p.icon}</span>
-                {p.title}
+            <Card key={idx} className="flex items-start p-4 rounded-lg hover:bg-slate-700 transition-colors shadow-lg glass">
+              <div className="flex items-center">
+                <span className="mr-2 text-3xl" role="img" aria-label="icon">{p.icon}</span>
+                <div className="flex flex-col">
+                  <h3 className="text-xl font-medium text-violet-300">{p.title}</h3>
+                  <p className="text-slate-300 mt-1">{p.description}</p>
+                </div>
               </div>
-              <p className="text-slate-300 mt-1">{p.description}</p>
-              <button
-                type="button"
-                onClick={() => handleButtonClick(p)}
-                className="mt-2 px-3 py-1 bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-400 text-slate-900 rounded hover:opacity-90"
-              >
+              <button type="button" onClick={() => handleButtonClick(p)} className="mt-2 px-3 py-1 bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-400 text-slate-900 rounded hover:opacity-90">
                 ▶ Play AI Voice
               </button>
-            </li>
+            </Card>
           ))}
         </ul>
       </div>
-    </>
+    </Card>
   );
 };
 
 export default PodcastsPage;
+
+

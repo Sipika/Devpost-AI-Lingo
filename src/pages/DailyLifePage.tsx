@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Card } from '../components/Card';
 
 const examples = [
   {
@@ -35,7 +36,7 @@ const DailyLifePage: React.FC = () => {
   const nextFact = () => setFactIdx((i) => (i + 1) % facts.length);
 
   return (
-    <div className="p-6 space-y-8">
+    <Card className="p-6 space-y-8">
       {/* Header */}
       <h2 className="text-3xl font-extrabold text-center bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-200 text-transparent mb-6">
         AI in Daily Life
@@ -58,19 +59,16 @@ const DailyLifePage: React.FC = () => {
       {/* Examples Grid */}
       <div className="grid gap-4 md:grid-cols-2">
         {examples.map((ex, idx) => (
-          <div
-            key={idx}
-            className="flex items-start p-4 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors shadow-lg"
-          >
+          <Card key={idx} className="flex items-start p-4 rounded-lg hover:bg-slate-700 transition-colors shadow-lg glass">
             <span className="text-3xl mr-3">{ex.icon}</span>
             <div>
               <h3 className="text-xl font-medium text-violet-300">{ex.title}</h3>
               <p className="text-slate-300 mt-1">{ex.description}</p>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
-    </div>
+    </Card>
   );
 };
 
