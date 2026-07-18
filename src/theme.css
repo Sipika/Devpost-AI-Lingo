@@ -1,0 +1,58 @@
+/* Theme definitions for AI‑Lingo UI redesign */
+:root {
+  --primary-start: #8b5cf6; /* violet */
+  --primary-mid: #6366f1;   /* indigo */
+  --primary-end: #34d399;   /* emerald */
+  --bg-dark: #0f172a;       /* slate-900 */
+  --bg-glass: rgba(30, 41, 59, 0.7);
+  --text-primary: #e0e7ff;
+  --text-secondary: #c7d2fe;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, var(--primary-start), var(--primary-mid), var(--primary-end));
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Button styling */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--primary-start), var(--primary-mid), var(--primary-end));
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px; /* pill */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+}
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+}
+
+/* Card utility */
+.card {
+  display: block;
+  background: var(--bg-glass);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: scale(1.03);
+}

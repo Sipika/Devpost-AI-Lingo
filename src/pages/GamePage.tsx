@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Game } from '../components/Game';
 import { GuideAvatar } from '../components/Guide/GuideAvatar';
-
+import { Card } from '../components/Card';
 
 const GamePage: React.FC = () => {
   const [showGuide, setShowGuide] = useState(true);
 
   return (
-    <div className="p-6 space-y-8">
+    <Card className="p-6 space-y-8">
       {/* Toggle button */}
       <button
         onClick={() => setShowGuide((v) => !v)}
@@ -23,7 +23,7 @@ const GamePage: React.FC = () => {
       )}
 
       <Game />
-    </div>
+    </Card>
   );
 };
 

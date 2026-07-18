@@ -1,14 +1,10 @@
 import React from 'react';
-
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Button } from './Button';
 
 type TabKey = 'game' | 'podcasts' | 'reading' | 'events' | 'news';
 
-interface NavBarProps {
-  setActiveTab?: (tab: TabKey) => void; // No longer needed, keep optional for compatibility
-}
-
-export const NavBar: React.FC<NavBarProps> = () => {
+export const NavBar: React.FC = () => {
   const location = useLocation();
   const tabs: { key: TabKey; label: string; path: string }[] = [
     { key: 'game', label: 'Game', path: '/game' },
@@ -19,19 +15,19 @@ export const NavBar: React.FC<NavBarProps> = () => {
   ];
 
   return (
-    <nav className="flex justify-center space-x-4 p-2 glass rounded-b-lg">
+    <nav className="flex justify-center space-x-2 p-2 glass rounded-b-lg">
       {tabs.map((tab) => (
-        <Link
+        <Button
           key={tab.key}
-          to={tab.path}
-          className={`px-3 py-1 rounded transition-colors duration-200 ${
+          href={tab.path}
+          className={
             location.pathname === tab.path
               ? 'bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-400 text-slate-900'
-              : 'text-slate-300 hover:text-slate-100 hover:bg-slate-800'
-          }`}
+              : 'bg-gray-800 text-slate-300 hover:bg-gray-700'
+          }
         >
           {tab.label}
-        </Link>
+        </Button>
       ))}
     </nav>
   );

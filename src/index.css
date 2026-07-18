@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "./theme.css";
 
 /* Custom Game Animations */
 @keyframes pop {
