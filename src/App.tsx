@@ -9,7 +9,7 @@ import NewsPage from './pages/NewsPage';
 export default function App() {
   return (
     <HashRouter>
-      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-[#0a0f1d] to-slate-950 text-slate-100 flex flex-col items-center p-4 relative overflow-x-hidden">
+      <div className="min-h-screen bg-gradient-to-b from-slate-950 via-[#0a0f1d] to-slate-950 text-slate-100 flex flex-col items-center p-4 relative overflow-x-hidden bg-grid">
         
         {/* Glow ambient background elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -19,9 +19,14 @@ export default function App() {
         </div>
 
         <header className="w-full max-w-5xl flex items-center justify-between mb-8 mt-4">
-          <h1 className="text-4xl font-black bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent tracking-tight">
-            AI‑Lingo
-          </h1>
+          <div className="flex items-center gap-3">
+            <span className="w-10 h-10 bg-gradient-to-tr from-violet-600 via-indigo-500 to-emerald-400 rounded-xl flex items-center justify-center font-black text-white text-xl shadow-lg shadow-violet-500/20 border border-white/25 select-none">
+              A
+            </span>
+            <h1 className="text-3xl font-black bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent tracking-tight">
+              AI‑Lingo
+            </h1>
+          </div>
         </header>
 
         {/* Re-designed welcome container */}
