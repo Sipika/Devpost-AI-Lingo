@@ -206,9 +206,9 @@ const Match3Board: React.FC = () => {
               <Tile
                 concept={concept?.name ?? ''}
                 icon={concept?.icon ?? ''}
+                selected={selected === i}
                 onClick={() => handleTileClick(i)}
               />
-              {/* overlay removed, central tip displayed instead */}
             </div>
           );
         })}
