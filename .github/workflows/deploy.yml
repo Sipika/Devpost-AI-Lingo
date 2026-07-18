@@ -5,31 +5,37 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write   # needed for peaceiris/actions-gh-pages to push to gh-pages
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     env:
       VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
       VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+          fetch-depth: 0
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-
+          node-version: '22'
       - name: Install dependencies
         run: npm ci
-
       - name: Build Vite site
         run: npm run build
-
+      - name: Configure Git for deployment
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          force: true
