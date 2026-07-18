@@ -18,7 +18,7 @@ export default function App() {
           <div className="absolute top-[40%] right-[20%] w-[35%] h-[35%] rounded-full bg-indigo-500/10 blur-[130px]" />
         </div>
 
-        <header className="w-full max-w-5xl flex items-center justify-between mb-8 mt-4">
+        <header className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between gap-4 mb-6 mt-4 border-b border-white/5 pb-4">
           <div className="flex items-center gap-3">
             <span className="w-10 h-10 bg-gradient-to-tr from-violet-600 via-indigo-500 to-emerald-400 rounded-xl flex items-center justify-center font-black text-white text-xl shadow-lg shadow-violet-500/20 border border-white/25 select-none">
               A
@@ -27,20 +27,8 @@ export default function App() {
               AI‑Lingo
             </h1>
           </div>
+          <NavBar />
         </header>
-
-        {/* Re-designed welcome container */}
-        <div className="w-full max-w-5xl p-6 rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-lg mb-8 text-center shadow-2xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/5 via-indigo-500/5 to-emerald-500/5 -z-10" />
-          <h2 className="text-xl font-bold text-white mb-2 flex items-center justify-center gap-2">
-            Welcome to AI‑Lingo! 🎉
-          </h2>
-          <p className="text-slate-300 text-sm max-w-2xl mx-auto">
-            Explore the app by switching the tabs below to play the match-3 game, listen to custom podcasts, read papers, or check the latest AI news!
-          </p>
-        </div>
-
-        <NavBar />
 
         <main className="w-full max-w-5xl mt-2 mb-12">
           <Routes>
