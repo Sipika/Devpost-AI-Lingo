@@ -36,37 +36,45 @@ const DailyLifePage: React.FC = () => {
   const nextFact = () => setFactIdx((i) => (i + 1) % facts.length);
 
   return (
-    <Card className="p-6 space-y-8">
-      {/* Header */}
-      <h2 className="text-3xl font-extrabold text-center bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-200 text-transparent mb-6">
-        AI in Daily Life
-      </h2>
+    <Card className="p-6 space-y-6">
+      <div className="p-2 space-y-6">
+        <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-200 border-b border-white/5 pb-4">
+          AI in Daily Life
+        </h2>
 
-      {/* Fact of the Day */}
-      <div className="flex items-center justify-between p-4 rounded-lg bg-slate-800 shadow-lg">
-        <div className="flex items-center space-x-3">
-          <span className="text-2xl">{facts[factIdx].icon}</span>
-          <p className="text-slate-100">{facts[factIdx].text}</p>
-        </div>
-        <button
-          onClick={nextFact}
-          className="px-3 py-1 bg-gradient-to-r from-violet-400 to-emerald-400 text-slate-900 rounded hover:opacity-90 transition"
-        >
-          Next
-        </button>
-      </div>
-
-      {/* Examples Grid */}
-      <div className="grid gap-4 md:grid-cols-2">
-        {examples.map((ex, idx) => (
-          <Card key={idx} className="flex items-start p-4 rounded-lg hover:bg-slate-700 transition-colors shadow-lg glass">
-            <span className="text-3xl mr-3">{ex.icon}</span>
+        {/* Fact of the Day */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 rounded-2xl bg-violet-600/5 border border-violet-500/10 shadow-lg backdrop-blur-md gap-4">
+          <div className="flex items-center space-x-4">
+            <span className="text-3xl p-2.5 bg-violet-500/10 rounded-xl" role="img" aria-label="fact-icon">
+              {facts[factIdx].icon}
+            </span>
             <div>
-              <h3 className="text-xl font-medium text-violet-300">{ex.title}</h3>
-              <p className="text-slate-300 mt-1">{ex.description}</p>
+              <span className="text-xs uppercase tracking-widest text-violet-400 font-bold">Fact of the Day</span>
+              <p className="text-slate-100 text-sm mt-0.5 leading-relaxed">{facts[factIdx].text}</p>
             </div>
-          </Card>
-        ))}
+          </div>
+          <button
+            onClick={nextFact}
+            className="button px-5 py-2.5 w-full sm:w-auto text-sm"
+          >
+            Next Fact
+          </button>
+        </div>
+
+        {/* Examples Grid */}
+        <div className="grid gap-4 md:grid-cols-2 mt-6">
+          {examples.map((ex, idx) => (
+            <Card key={idx} className="flex items-start p-5 gap-4 glass">
+              <span className="text-4xl p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex-shrink-0" role="img" aria-label="icon">
+                {ex.icon}
+              </span>
+              <div className="space-y-1">
+                <h3 className="text-lg font-bold text-emerald-300">{ex.title}</h3>
+                <p className="text-slate-300 text-sm leading-relaxed">{ex.description}</p>
+              </div>
+            </Card>
+          ))}
+        </div>
       </div>
     </Card>
   );

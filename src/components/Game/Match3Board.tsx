@@ -214,15 +214,16 @@ const Match3Board: React.FC = () => {
         })}
       </div>
       <button
-        className="mt-4 px-4 py-2 bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-400 text-slate-900 rounded hover:opacity-90"
+        className="button mt-4"
         onClick={restart}
       >
         Restart
       </button>
       {/* Central AI tip */}
       {centralTip && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-slate-800 text-slate-100 px-4 py-2 rounded shadow-lg">
-          {centralTip}
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-950/85 border border-white/15 backdrop-blur-lg text-slate-100 px-6 py-3.5 rounded-2xl shadow-2xl z-50 text-sm max-w-md text-center flex items-center gap-3">
+          <span className="text-xl">💡</span>
+          <span className="leading-relaxed font-medium">{centralTip}</span>
         </div>
       )}
     </div>

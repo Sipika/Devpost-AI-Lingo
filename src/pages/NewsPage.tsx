@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 
 const NewsPage: React.FC = () => {
@@ -15,20 +14,40 @@ const NewsPage: React.FC = () => {
     { title: 'VentureBeat AI', url: 'https://venturebeat.com/category/ai/', icon: '🚀' },
   ];
   return (
-    <Card className="p-4 space-y-6">
-      <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-200 mb-6">
-        AI News
-      </h2>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {latestNews.map((item, idx) => (
-          <Button key={idx} href={item.url} className="card">
-            <div className="flex items-center">
-              <span role="img" aria-label="icon" className="mr-2 text-4xl">{item.icon}</span>
-              <h3 className="text-xl font-medium text-violet-300">{item.title}</h3>
-            </div>
-            <p className="mt-2 text-slate-300">Read the latest AI news article.</p>
-          </Button>
-        ))}
+    <Card className="p-6 space-y-6">
+      <div className="p-2 space-y-6">
+        <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-200 border-b border-white/5 pb-4">
+          AI News
+        </h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {latestNews.map((item, idx) => (
+            <a
+              key={idx}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card glass p-5 flex flex-col justify-between items-start gap-4 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 text-left"
+              style={{ textDecoration: 'none' }}
+            >
+              <div className="space-y-3 w-full">
+                <span className="text-4xl p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl inline-block" role="img" aria-label="icon">
+                  {item.icon}
+                </span>
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-indigo-300 leading-tight">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs">
+                    Read the latest publications, updates, and releases.
+                  </p>
+                </div>
+              </div>
+              <span className="text-xs font-semibold text-violet-400 flex items-center gap-1">
+                Read Article →
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
     </Card>
   );

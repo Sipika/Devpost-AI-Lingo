@@ -29,22 +29,34 @@ const ReadingPage: React.FC = () => {
   console.log('ReadingPage rendered');
   return (
     <Card className="p-6 space-y-6">
-      <div className="p-4 space-y-6">
-        <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-200 mb-4">
+      <div className="p-2 space-y-6">
+        <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-200 border-b border-white/5 pb-4">
           AI Reading List
         </h2>
-        <ul className="space-y-4">
+        <div className="space-y-4">
           {articles.map((a, idx) => (
-            <li key={idx} className="p-4 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors shadow-lg glass">
-              <a href={a.url} target="_blank" rel="noopener noreferrer" className="text-xl font-medium text-violet-300 hover:underline flex items-center">
-                <span className="mr-2" role="img" aria-label="book">📚</span>
-                {a.title} ({a.year})
+            <Card key={idx} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-5 gap-4 glass">
+              <div className="flex items-start gap-4">
+                <span className="text-4xl p-3 bg-violet-500/10 border border-violet-500/20 rounded-2xl flex-shrink-0" role="img" aria-label="icon">
+                  📚
+                </span>
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-violet-200">{a.title} ({a.year})</h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">{a.summary}</p>
+                  <p className="text-slate-400 text-xs font-semibold">Authors: {a.authors}</p>
+                </div>
+              </div>
+              <a
+                href={a.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button px-5 py-2.5 flex-shrink-0 w-full sm:w-auto text-center"
+              >
+                Read Paper
               </a>
-              <p className="text-slate-300 mt-1">{a.summary}</p>
-              <p className="text-slate-400 text-sm mt-1">Authors: {a.authors}</p>
-            </li>
+            </Card>
           ))}
-        </ul>
+        </div>
       </div>
     </Card>
   );
