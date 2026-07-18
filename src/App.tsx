@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { NavBar } from './components/NavBar';
+import { useState } from 'react';
+import { NavBar } from './components/NavBar.tsx';
 
 type Tab = 'game' | 'podcasts' | 'reading' | 'events';
 
