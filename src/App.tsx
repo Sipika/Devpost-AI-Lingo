@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { NavBar } from './components/NavBar';
 import GamePage from './pages/GamePage';
 import PodcastsPage from './pages/PodcastsPage';
@@ -8,7 +8,7 @@ import NewsPage from './pages/NewsPage';
 
 export default function App() {
   return (
-    <BrowserRouter basename="/Devpost-AI-Lingo">
+    <HashRouter>
       <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center p-4">
         <header className="w-full max-w-5xl flex items-center justify-between mb-6">
           <h1 className="text-3xl font-extrabold bg-gradient-to-r from-violet-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
@@ -31,6 +31,6 @@ export default function App() {
           </Routes>
         </main>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
