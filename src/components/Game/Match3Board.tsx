@@ -105,7 +105,7 @@ const Match3Board: React.FC = () => {
   const [selected, setSelected] = useState<number | null>(null);
   const [score, setScore] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
   const [centralTip, setCentralTip] = useState<string | null>(null);
   const [shownTips, setShownTips] = useState<Set<number>>(new Set());
 
@@ -151,7 +151,7 @@ const Match3Board: React.FC = () => {
         // Set a single central AI tip for the first matched concept
         let chosenTip: string | undefined;
         if (matches.size > 0) {
-          const firstIdx = matches.values().next().value;
+          const firstIdx = matches.values().next().value as number;
           const conceptId = board[firstIdx] as number;
           chosenTip = concepts[conceptId]?.tip;
         }
@@ -191,7 +191,7 @@ const Match3Board: React.FC = () => {
     setScore(0);
     setSelected(null);
     setAnimating(false);
-    setToastMessage(null);
+
   };
 
   return (

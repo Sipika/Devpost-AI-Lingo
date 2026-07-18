@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Match3Board from './Game/Match3Board';
 
 export const Game: React.FC = () => {

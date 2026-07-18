@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Game } from '../components/Game';
 import { GuideAvatar } from '../components/Guide/GuideAvatar';
-import { Bot } from 'lucide-react';
+
 
 const GamePage: React.FC = () => {
   const [showGuide, setShowGuide] = useState(true);
