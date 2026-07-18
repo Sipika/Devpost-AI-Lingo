@@ -9,13 +9,36 @@ export default function App() {
   const renderContent = () => {
     switch (activeTab) {
       case 'game':
-        return <div className="p-4 text-center text-slate-200">Game component will appear here.</div>;
+        return <div className="p-4 text-center text-slate-200">🚀 <strong>AI‑Lingo Game</strong> – Match‑3 nodes to learn AI basics.</div>;
       case 'podcasts':
-        return <div className="p-4 text-center text-slate-200">Simple list of AI podcasts will appear here.</div>;
+        return (
+          <div className="p-4 space-y-4">
+            <h2 className="text-xl font-semibold text-slate-100">AI Podcasts</h2>
+            <ul className="list-disc list-inside text-slate-200">
+              <li><a href="#" className="underline hover:text-slate-400">AI Explained – Simple AI concepts</a></li>
+              <li><a href="#" className="underline hover:text-slate-400">Machine Learning Minute</a></li>
+              <li><a href="#" className="underline hover:text-slate-400">Data Science Talk</a></li>
+            </ul>
+          </div>
+        );
       case 'reading':
-        return <div className="p-4 text-center text-slate-200">AI articles reading section will appear here.</div>;
+        return (
+          <div className="p-4 space-y-4">
+            <h2 className="text-xl font-semibold text-slate-100">AI Articles</h2>
+            <ul className="list-disc list-inside text-slate-200">
+              <li><a href="#" className="underline hover:text-slate-400">Understanding Neural Networks</a></li>
+              <li><a href="#" className="underline hover:text-slate-400">What is Bias in AI?</a></li>
+              <li><a href="#" className="underline hover:text-slate-400">Intro to Reinforcement Learning</a></li>
+            </ul>
+          </div>
+        );
       case 'events':
-        return <div className="p-4 text-center text-slate-200">Daily life AI concepts explanations will appear here.</div>;
+        return (
+          <div className="p-4 space-y-4">
+            <h2 className="text-xl font-semibold text-slate-100">AI in Daily Life</h2>
+            <p className="text-slate-200">How your phone suggests contacts, how streaming services recommend movies, and how smart home devices learn your habits.</p>
+          </div>
+        );
       default:
         return null;
     }
