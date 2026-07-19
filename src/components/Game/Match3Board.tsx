@@ -507,6 +507,13 @@ export const Match3Board: React.FC = () => {
 
   // Supabase Database: Get Top 10 Highscores
   const fetchLeaderboard = async () => {
+    const defaultScores = [
+      { player_name: 'Elena_AI', score: 1850, level: 3 },
+      { player_name: 'Carlos_RAG', score: 1420, level: 2 },
+      { player_name: 'Sophia_Dev', score: 950, level: 2 },
+      { player_name: 'Mateo_NLP', score: 620, level: 1 }
+    ];
+
     try {
       const { data, error } = await supabase
         .from('game_scores')
@@ -515,7 +522,7 @@ export const Match3Board: React.FC = () => {
         .limit(10);
 
       if (error) throw error;
-      setLeaderboard(data || []);
+      setLeaderboard(data && data.length > 0 ? data : defaultScores);
       setDbError(false);
     } catch (err) {
       console.warn("Supabase fetch failed. Falling back to local storage.", err);
@@ -523,6 +530,9 @@ export const Match3Board: React.FC = () => {
       const local = localStorage.getItem('game_scores');
       if (local) {
         setLeaderboard(JSON.parse(local).slice(0, 10));
+      } else {
+        setLeaderboard(defaultScores);
+        localStorage.setItem('game_scores', JSON.stringify(defaultScores));
       }
     }
   };
@@ -761,20 +771,20 @@ export const Match3Board: React.FC = () => {
             <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3.5">
               Node Glossary
             </h3>
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {Object.values(GEM_TYPES).map(type => {
                 const Icon = type.icon;
                 return (
                   <div 
                     key={type.id} 
-                    className="p-2 border border-white/5 bg-slate-950/40 rounded-xl flex items-center gap-2"
+                    className="p-3 border border-white/5 bg-slate-950/40 rounded-xl flex items-start gap-2.5 transition-all hover:bg-slate-900/60"
                   >
                     <div className={`p-1.5 rounded-lg ${type.bgClass} flex items-center justify-center shrink-0`}>
-                      <Icon className="w-3.5 h-3.5" />
+                      <Icon className="w-4 h-4" />
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-xs font-bold truncate text-slate-200">{type.label}</p>
-                      <p className="text-[9px] text-slate-500 truncate">{type.fact.slice(0, 30)}...</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-bold text-slate-200">{type.label}</p>
+                      <p className="text-[10px] text-slate-400 leading-normal mt-0.5 whitespace-normal break-words">{type.fact}</p>
                     </div>
                   </div>
                 );
