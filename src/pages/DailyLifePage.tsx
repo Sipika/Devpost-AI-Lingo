@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { Coffee, ShoppingCart, Bus, Utensils, MapPin, Users, X, Info, Sparkles } from 'lucide-react';
+import { Coffee, ShoppingCart, Bus, Utensils, MapPin, Users, X, Sparkles } from 'lucide-react';
 
 const scenarios = [
   {
@@ -15,7 +15,9 @@ const scenarios = [
     details: {
       vocabulary: ['Latte', 'Espresso', 'Pastry', 'To go', 'For here'],
       phrases: ['Can I get a large latte?', 'Is this for here or to go?', 'Keep the change.'],
-      dialog: 'A: Hi, what can I get for you?\nB: I\'ll have a medium cappuccino to go, please.'
+      dialog: 'A: Hi, what can I get for you?\nB: I\'ll have a medium cappuccino to go, please.',
+      techStack: 'Collaborative Filtering & Time-Series forecasting (ARIMA / LSTM models)',
+      deepDive: 'Point-of-Sale (POS) systems leverage Collaborative Filtering algorithms to cross-reference your purchase history with thousands of other customers. If 85% of people ordering flat whites also buy almond croissants between 8:00 AM and 9:00 AM, the app automatically surfaces localized cross-sell recommendations. Concurrently, Recurrent Neural Networks (LSTM) process local weather data, traffic data, and day-of-week trends to optimize supply chains and predict raw dairy/bean depletion rates.'
     }
   },
   {
@@ -30,7 +32,9 @@ const scenarios = [
     details: {
       vocabulary: ['Aisle', 'Cashier', 'Receipt', 'Discount', 'Fitting room'],
       phrases: ['Where can I find the dairy section?', 'Do you have this in a medium?', 'I would like to return this.'],
-      dialog: 'A: Did you find everything okay?\nB: Yes, thanks. Just these two items.'
+      dialog: 'A: Did you find everything okay?\nB: Yes, thanks. Just these two items.',
+      techStack: 'Convolutional Neural Networks (CNN) & Reinforcement Learning (Q-learning)',
+      deepDive: 'Smart retail outlets employ YOLO (You Only Look Once) or Mask R-CNN vision pipelines overhead. These architectures identify objects passing into shopping baskets in milliseconds, executing object detection and instance segmentation. Simultaneously, reinforcement learning-driven dynamic pricing models adjust price labels dynamically on digital screens, optimizing profit margins based on competitor price scrapers, weather patterns, and real-time inventory velocity.'
     }
   },
   {
@@ -45,7 +49,9 @@ const scenarios = [
     details: {
       vocabulary: ['Fare', 'Schedule', 'Platform', 'Transfer', 'Commute'],
       phrases: ['Does this bus go to downtown?', 'How much is a single ticket?', 'Where do I change trains?'],
-      dialog: 'A: Excuse me, is this the right platform for the express train?\nB: Yes, it should arrive in about 5 minutes.'
+      dialog: 'A: Excuse me, is this the right platform for the express train?\nB: Yes, it should arrive in about 5 minutes.',
+      techStack: 'Spatial-Temporal Graph Neural Networks (ST-GNN) & GPS-Telemetry heuristics',
+      deepDive: 'Transit schedules utilize Spatial-Temporal Graph Neural Networks to model urban road layouts as a mathematical graph where intersections are vertices and roads are edges. Telemetry feeds from bus GPS trackers are filtered through Kalman filters to smooth sensor noise. The GNN then predicts traffic congestion propagation across neighboring nodes, allowing transit systems to dynamically re-route vehicles and output highly accurate Estimated Time of Arrival (ETA) values.'
     }
   },
   {
@@ -60,7 +66,9 @@ const scenarios = [
     details: {
       vocabulary: ['Appetizer', 'Entree', 'Dessert', 'Reservation', 'Tip'],
       phrases: ['I have a reservation for two under John.', 'Could we see the dessert menu?', 'Check, please.'],
-      dialog: 'A: Are you ready to order?\nB: Yes, I\'ll have the grilled salmon, please.'
+      dialog: 'A: Are you ready to order?\nB: Yes, I\'ll have the grilled salmon, please.',
+      techStack: 'Integer Linear Programming (ILP) & Queue Theory optimization systems',
+      deepDive: 'Online reservation platforms solve complex allocation challenges using Integer Linear Programming (ILP). The software structures table assignments as constraint-satisfaction problems, maximizing seating density and minimizing table idle times. In the kitchen, priority queue scheduling algorithms analyze ticket recipes, estimating prepare/cook durations for each dish component to align finishing times, preventing food from cooling under heat lamps.'
     }
   },
   {
@@ -75,7 +83,9 @@ const scenarios = [
     details: {
       vocabulary: ['Intersection', 'Landmark', 'Block', 'Straight', 'Crosswalk'],
       phrases: ['Excuse me, where is the nearest subway station?', 'Go straight for two blocks.', 'It\'s on your left.'],
-      dialog: 'A: Could you tell me how to get to the museum?\nB: Sure, go down this street and turn right at the next corner.'
+      dialog: 'A: Could you tell me how to get to the museum?\nB: Sure, go down this street and turn right at the next corner.',
+      techStack: 'A* Pathfinding Search, Dijkstra optimization & Deep Q-Networks (DQN)',
+      deepDive: 'When asking a routing app for directions, the system executes an optimized A* search algorithm or contraction hierarchies on massive road network databases. Real-time speed adjustments are predicted using Deep Q-Networks that simulate route trajectories. By analyzing historical driving velocities and current user densities, the algorithm calculates alternative routes to bypass gridlock patterns before you even reach them.'
     }
   },
   {
@@ -90,7 +100,9 @@ const scenarios = [
     details: {
       vocabulary: ['Agenda', 'Brainstorm', 'Deadline', 'Feedback', 'Minutes'],
       phrases: ['Let\'s kick off this meeting.', 'Can we schedule a follow-up?', 'I\'d like to hear everyone\'s thoughts.'],
-      dialog: 'A: Thanks for joining. Let\'s review the agenda.\nB: Sounds good, I\'ll take the minutes.'
+      dialog: 'A: Thanks for joining. Let\'s review the agenda.\nB: Sounds good, I\'ll take the minutes.',
+      techStack: 'Whisper Automatic Speech Recognition (ASR) & Transformer LLM summary pipelines',
+      deepDive: 'Modern video conference platforms leverage end-to-end Whisper-style sequence-to-sequence transformer models to map audio spectrogram waveforms to text tokens in real time. Following transcription, diarization algorithms identify speakers by clustering vocal pitch and resonance embedding vectors. Finally, Large Language Models run contextual attention passes on the transcript to extract action items, generate summaries, and email agendas.'
     }
   }
 ];
@@ -221,13 +233,18 @@ export default function DailyLifePage() {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-indigo-950/20 p-4 rounded-xl border border-indigo-500/20">
-                <h4 className="text-indigo-400 font-bold mb-1.5 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                  <Info className="w-4 h-4" /> Everyday AI Connection
+              <div className="bg-indigo-950/30 p-5 rounded-xl border border-indigo-500/25 space-y-3">
+                <h4 className="text-indigo-400 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-cyan-400" /> Technical AI Integration
                 </h4>
-                <p className="text-slate-300 text-xs leading-relaxed font-medium">
-                  {selectedScenario.aiExplanation}
-                </p>
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wide block">Tech Stack & Algorithms</span>
+                  <p className="text-cyan-300 text-xs font-semibold mt-0.5">{selectedScenario.details.techStack}</p>
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wide block">Deep Dive Analytics</span>
+                  <p className="text-slate-300 text-[11px] leading-relaxed mt-1 font-medium">{selectedScenario.details.deepDive}</p>
+                </div>
               </div>
 
               <div>
