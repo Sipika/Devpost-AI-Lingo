@@ -522,14 +522,20 @@ export const Match3Board: React.FC = () => {
         .limit(10);
 
       if (error) throw error;
-      setLeaderboard(data && data.length > 0 ? data : defaultScores);
+      
+      if (data && data.length > 0) {
+        setLeaderboard(data);
+      } else {
+        setLeaderboard(defaultScores);
+      }
       setDbError(false);
     } catch (err) {
       console.warn("Supabase fetch failed. Falling back to local storage.", err);
       setDbError(true);
       const local = localStorage.getItem('game_scores');
       if (local) {
-        setLeaderboard(JSON.parse(local).slice(0, 10));
+        const parsed = JSON.parse(local);
+        setLeaderboard(parsed && parsed.length > 0 ? parsed : defaultScores);
       } else {
         setLeaderboard(defaultScores);
         localStorage.setItem('game_scores', JSON.stringify(defaultScores));
